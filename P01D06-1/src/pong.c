@@ -10,7 +10,7 @@ void draw_court() {
                 printf(")");
                 printf("\n");
             }
-            else if (i == 0 && j > 0 && j < WIDTH || i == LENGTH && j > 0 && j < WIDTH )
+            else if (((i == 0) && (j > 0) && (j < WIDTH)) || ((i == LENGTH) && (j > 0) && (j < WIDTH )))
                 printf("#");
             else if (j == 41 && i != 0 && i != LENGTH)
                 printf("|");

@@ -1,9 +1,6 @@
 #include<stdio.h>
 
-#define WIDTH 82;
-#define LENGTH 22;
-
- 
+int WIDTH = 82, LENGTH = 27;
 int ballX, ballY; /*координаты шарика, задаем начальное, дальше задаем рандомное перемещение по 1*/
 int dirX = 1, dirY = 1; /*направление движения шарика*/
 int rocketX, rocketY; /*координаты ракетки, где х всегда равен 1!*/
@@ -18,7 +15,7 @@ void draw_court() {
                 printf(")");
                 printf("\n");
             }
-            else if (i == 0 && j > 0 && j < WIDTH || i == LENGTH && j > 0 && j < WIDTH )
+            else if (((i == 0) && (j > 0) && (j < WIDTH)) || ((i == LENGTH) && (j > 0) && (j < WIDTH )))
                 printf("#");
             else if (j == 41 && i != 0 && i != LENGTH)
                 printf("|");
@@ -44,7 +41,7 @@ int RocketMovementLeft(char key){
                 rocketY ++; 
         }
     } 
-    
+    return rocketY;
 }
 
 int RocketMovementRight(char key){
@@ -57,16 +54,16 @@ int RocketMovementRight(char key){
                 rocketY ++; 
         }
     }
+    return rocketY;
 }
 void draw_rocket(){
     /*нарисовать ракетку и передавать в нее изменение координат
     есть исходная позиция и цикл где перезаписывается позиция пока идет игра 
     на основе функций изменения позиции*/
     for (int y=0; y<LENGTH; y++){
-        for (int x=0; x<WIDTH, x++){
-            if (x==1 && y>=(LENGTH/2)-1 && y<=(LENGTH/2)>=2){
-                printf("| /n")
-
+        for (int x=0; x<WIDTH; x++){
+            if (x==1 && y>=(LENGTH/2)-1 && y<=(LENGTH/2)+2){
+                printf("| /n");
             }
     }
     }
@@ -76,7 +73,7 @@ void draw_rocket(){
 
 void draw_ball(){
     for (int y=0; y<LENGTH; y++){
-        for (int x=0; x<WIDTH, x++){
+        for (int x=0; x<WIDTH; x++){
             if (x==ballX && y==ballY){
                 printf("0 /n");
             }
@@ -84,7 +81,7 @@ void draw_ball(){
     }
 }
 
-void move_ball(){
+int move_ball(){
     dirX += dirX;
     dirY += dirY;
 
@@ -94,11 +91,12 @@ void move_ball(){
     }
     /*столкновение с ракеткой*/
     /*пролетает мимо ракетки*/
-
+return dirX; 
 
 }
 int main(){
-   
+    int scorePlayer1=0;
+    int scorePlayer2=0;
     ballX = WIDTH-1;
     ballY = LENGTH/2;
     rocketX = 1;
@@ -106,10 +104,10 @@ int main(){
     /*проверка является ли key a или z тогда передаем в функцию RocketMovementLeft*/
     /*проверка является ли key k или m тогда передаем в функцию RocketMovementRight*/
     key = getchar();
-    if (key=="a" || "z"){
+    if (key=='a' || 'z'){
        return RocketMovementLeft(key);
-    } else if(key == "k" || "m"){
-        return ROcketMovementRight(key);
+    } else if(key == 'k' || 'm'){
+        return RocketMovementRight(key);
     }
     /*пока счет одного из игроков е станет 21*/
 
